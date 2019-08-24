@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Teman"
+            android:textSize="19sp"
+            android:layout_margin="16dp"
+            android:textColor="#000"
+            android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_name"
+                android:hint="Nama"
+                android:textColorHint="#CCC"
+                android:textColor="#000"
+                android:inputType="text"
+                android:imeOptions="actionDone"/>
+
+        <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_gender"
+                android:layout_marginTop="16dp"
+                android:textColor="#000"
+                android:entries="@array/gender_list">
+
+        </Spinner>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Email"
+                android:hint="Email"
+                android:layout_marginTop="16dp"
+                android:textColor="#000"
+                android:textColorHint="#ccc"
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionNext"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Telp"
+                android:hint="Telp"
+                android:layout_marginTop="16dp"
+                android:textColor="#000"
+                android:textColorHint="#ccc"
+                android:inputType="number"
+                android:imeOptions="actionNext"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="top"
+                android:id="@+id/Alamat"
+                android:hint="Alamat"
+                android:layout_marginTop="16dp"
+                android:textColor="#000"
+                android:textColorHint="#ccc"
+                android:inputType="textMultiLine"
+                android:imeOptions="actionDone"
+                />
+
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSave"
+                android:text="simpan"
+                android:layout_marginTop="24dp"
+                />
+    </LinearLayout>
+
+</LinearLayout>
