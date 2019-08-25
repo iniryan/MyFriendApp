@@ -17,7 +17,7 @@ class MyFriendAdaptor (private val context: Context, private val item: ArrayList
         holder.bindItem(item.get(position))
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = item.size
 
     class ViewHolder (override val containerView: View):
             RecyclerView.ViewHolder(containerView), LayoutContainer{
