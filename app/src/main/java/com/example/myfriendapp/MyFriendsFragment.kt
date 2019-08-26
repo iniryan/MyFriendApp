@@ -67,9 +67,13 @@ class MyFriendsFragment:Fragment(){
         })
     }
 
+
+
     private fun tampilToast(message: String){
         Toast.makeText(activity!!, message, Toast.LENGTH_SHORT).show()
     }
+
+
 
    // private fun simulasiDataTeman(){
    //     listTeman = ArrayList()

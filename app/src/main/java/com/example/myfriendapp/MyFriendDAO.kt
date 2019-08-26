@@ -1,10 +1,7 @@
 package com.example.myfriendapp
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface MyFriendDAO{
@@ -13,4 +10,10 @@ interface MyFriendDAO{
 
     @Query("SELECT * FROM MyFriend")
     fun ambilSemuaTeman():LiveData<List<MyFriend>>
+
+    @Update
+    fun updateTeman(friend: MyFriend)
+
+    @Delete
+    fun deleteTeman(friend: MyFriend)
 }

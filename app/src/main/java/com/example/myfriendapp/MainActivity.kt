@@ -10,6 +10,18 @@ import kotlinx.android.synthetic.main.my_friends_fragment.*
 
 class MainActivity : AppCompatActivity() {
 
+    companion object{
+        var myFriend: MyFriend? = null
+
+        fun setData(myFriend: MyFriend){
+            this.myFriend = myFriend
+        }
+
+        fun removeData(){
+            myFriend = null
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.room.Update
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.my_friends_add_fragment.*
 import kotlinx.coroutines.GlobalScope
@@ -40,17 +41,44 @@ class MyFriendsAddFragment :Fragment(){
         super.onViewCreated(view, savedInstanceState)
         initLocalDB()
         initView()
+        checkData()
+
     }
 
     private fun initView() {
         btnSave.setOnClickListener {
             validasiInput()
+
         }
+
+        btnDelete.setOnClickListener {
+            if (MainActivity.myFriend != null) {
+                hapusTeman(MainActivity.myFriend!!)
+                MainActivity.removeData()
+            }
+        }
+
     }
 
     private fun initLocalDB(){
         db = AppDatabase.getAppDatabase(activity!!)
         myFriendDao= db?.myFriendDao()
+    }
+
+    private fun checkData(){
+        val myFriendData = MainActivity.myFriend
+        if (myFriendData != null){
+            edit_name.setText(myFriendData.nama)
+            Alamat.setText(myFriendData.alamat)
+            Telp.setText(myFriendData.telp)
+            Email.setText(myFriendData.email)
+            if(myFriendData.kelamin == "Lelaki")
+                spinner_gender.setSelection(1)
+            else if(myFriendData.kelamin == "Cewek")
+                spinner_gender.setSelection(2)
+            else
+                spinner_gender.setSelection(0)
+        }
     }
 
     private fun validasiInput(){
@@ -62,16 +90,40 @@ class MyFriendsAddFragment :Fragment(){
 
         when{
             namaInput.isEmpty() -> edit_name.error = "Nama tidak boleh kosong"
-            genderInput.equals("Pilih Kelamin") -> tampilToast("Pilih gender!")
+            genderInput.equals("Pilih jenis kelamin") -> tampilToast("Pilih gender!")
             emailInput.isEmpty() -> Email.error = "Email tidak boleh kosong"
             telpInput.isEmpty() -> Telp.error = "Telepon tidak boleh kosong"
             alamatInput.isEmpty() -> Alamat.error = "Alamat tidak boleh kosong"
 
             else -> {
-                val teman = MyFriend(null, namaInput, genderInput, emailInput, telpInput, alamatInput)
+                if (MainActivity.myFriend != null){
+                    val teman = MyFriend(MainActivity.myFriend?.temanId, namaInput, genderInput, emailInput,
+                        alamatInput, telpInput)
+                    updateTeman(teman)
+                }
+                else{
+                    val teman = MyFriend(null, namaInput, genderInput, emailInput,
+                        alamatInput, telpInput)
+                    tambahDataTeman(teman)
+                }
 
-                tambahDataTeman(teman)
             }
+        }
+    }
+
+    private fun updateTeman(teman: MyFriend): Job{
+        return GlobalScope.launch {
+            myFriendDao?.updateTeman(teman)
+            (activity as MainActivity).tampilMyFriendsFragment()
+            MainActivity.removeData()
+        }
+    }
+
+    private fun hapusTeman(teman: MyFriend): Job{
+        return GlobalScope.launch {
+            myFriendDao?.deleteTeman(teman)
+            (activity as MainActivity).tampilMyFriendsFragment()
+            MainActivity.removeData()
         }
     }
 
@@ -88,6 +140,7 @@ class MyFriendsAddFragment :Fragment(){
 
     override fun onDestroy() {
         super.onDestroy()
+        clearFindViewByIdCache()
     }
 }
 

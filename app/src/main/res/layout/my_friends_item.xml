@@ -18,6 +18,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtFriendsName"
                 android:text="Nama"
+                android:textStyle="bold"
                 android:textSize="18sp"
 
         />
@@ -34,13 +35,31 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtFriendsTlp"
                 android:text="Telp"
-                android:textSize="20sp"
+                android:textSize="16sp"
+                android:layout_marginTop="4dp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_lolgender"
+                android:text="Gender"
+                android:textSize="16sp"
+                android:layout_marginTop="4dp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtFriendsAlamat"
+                android:text="Alamat"
+                android:textSize="16sp"
                 android:layout_marginTop="4dp"
                 />
 
-    </LinearLayout>
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#000"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#ccc"/>
+
+</LinearLayout>
 </LinearLayout>
